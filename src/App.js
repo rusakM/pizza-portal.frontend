@@ -1,5 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+
+import Header from "./components/header/header.component";
+import Footer from "./components/footer/footer.component";
 import LandingPage from "./pages/landing-page/landing-page.component";
 
 class App extends React.Component {
@@ -12,9 +15,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <Switch>
-        <Route exact component={LandingPage} path="/" />
-      </Switch>
+      <div>
+        <Header
+          currentUser={this.state.currentUser}
+          history={this.props.history}
+        />
+        <Switch>
+          <Route exact component={LandingPage} path="/" />
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 }
