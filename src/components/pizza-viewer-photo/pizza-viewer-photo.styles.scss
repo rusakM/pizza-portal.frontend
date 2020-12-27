@@ -1,0 +1,16 @@
+.pizza-viewer-photo-container {
+    position: relative;
+    width: 100%;
+    img {
+        width: 40%;
+        margin-left: 30%;
+        transition: 60s linear;
+        @media (max-width: 500px) {
+            width: 60%;
+            margin-left: 20%;
+        }
+        &:hover {
+            transform: rotate(360deg);
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.pizza-viewer-ingredients-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 4em 0 3em 0;
+    p {
+        font-size: larger;
+        text-align: center;
+    }
+    .ingredients-list {
+        display: flex;
+        flex-direction: row;
+        margin-top: 2em;
+        height: 100%;
+        overflow-x: auto;
+        justify-content: center;
+        @media (max-width: 1024px) {
+            padding-left: 0.5em;
+            justify-content: flex-start;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+}
