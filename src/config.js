@@ -1,4 +1,4 @@
-const api = 'http://192.168.0.88:3002';
+const api = 'http://localhost:3002';
 
 export const apiUrl = `${api}/api`;
 

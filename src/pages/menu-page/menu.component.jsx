@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import MenuButton from '../../components/menu-button/menu-button.component';
 import MenuList from '../../components/menu-list/menu-list.component';
-import { apiUrl } from '../../config';
 
 import './menu.styles.scss';
 
@@ -21,7 +20,7 @@ class Menu extends React.Component {
     componentDidMount() {
         axios({
             method: 'GET',
-            url: `${apiUrl}/pizzas/templates?sort=+price`,
+            url: `api/pizzas/templates?sort=+price`,
         }).then((response) => {
             this.setState({
                 pizza: response.data.data,
@@ -32,7 +31,7 @@ class Menu extends React.Component {
     clickHandlerMenuButton = (e) => {
         console.log(e.target);
         const name = e.target.innerText.toLowerCase();
-        const url = `${apiUrl}/products?category=${e.target.innerText}`;
+        const url = `api/products?category=${e.target.innerText}`;
         if (!this.state[name].length && name !== 'pizza') {
             axios({
                 method: 'GET',

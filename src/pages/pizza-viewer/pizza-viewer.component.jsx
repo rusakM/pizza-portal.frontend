@@ -2,7 +2,6 @@ import React, { createRef } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { apiUrl, uploadsUrl } from '../../config';
 
 import PizzaViewerPhoto from '../../components/pizza-viewer-photo/pizza-viewer-photo.component';
 import PizzaViewerButtons from '../../components/pizza-viewer-buttons/pizza-viewer-buttons.component';
@@ -44,7 +43,7 @@ class PizzaViewer extends React.Component {
         const slug = this.props.history.location.pathname.split('/')[3];
         axios({
             method: 'GET',
-            url: `${apiUrl}/pizzas/templates?slug=${slug}`,
+            url: `/api/pizzas/templates?slug=${slug}`,
         }).then((response) => {
             this.setState(
                 {
@@ -93,7 +92,7 @@ class PizzaViewer extends React.Component {
             ? this.state.pizzaData.smallPizza.ingredients.map((ingredient) => {
                   return {
                       name: ingredient.name,
-                      coverPhoto: `${uploadsUrl}/supplies/${ingredient.coverPhoto}.png`,
+                      coverPhoto: `/uploads/supplies/${ingredient.coverPhoto}.png`,
                   };
               })
             : [];
