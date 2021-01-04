@@ -82,7 +82,6 @@ class Menu extends React.Component {
                 <MenuList
                     items={this.state[this.state.activeList].data}
                     category={this.state.activeList}
-                    addItemToCheckout={this.props.addItemToCheckout}
                 />
             </div>
         );

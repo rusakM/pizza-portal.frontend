@@ -33,8 +33,8 @@ class Checkout {
     }
 
     saveCheckoutToSessionStorage = () => {
-        sessionStorage.addItem('checkout', JSON.stringify(this.checkout));
-        sessionStorage.addItem('checkoutItems', `${this.checkoutItems}`);
+        sessionStorage.setItem('checkout', JSON.stringify(this.checkout));
+        sessionStorage.setItem('checkoutItems', `${this.checkoutItems}`);
     };
 
     addItem = (item, category) => {

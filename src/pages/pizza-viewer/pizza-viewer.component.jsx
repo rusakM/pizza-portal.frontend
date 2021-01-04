@@ -2,6 +2,7 @@ import React, { createRef } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import Checkout, { CHECKOUT_CATEGORIES } from '../../checkout/checkout';
 
 import PizzaViewerPhoto from '../../components/pizza-viewer-photo/pizza-viewer-photo.component';
 import PizzaViewerButtons from '../../components/pizza-viewer-buttons/pizza-viewer-buttons.component';
@@ -85,6 +86,15 @@ class PizzaViewer extends React.Component {
         if (!this.state.currentPizza) {
             return;
         }
+        const checkout = new Checkout();
+        const { currentPizza, pizzaData } = this.state;
+        currentPizza.template = {
+            id: pizzaData.id,
+            coverPhoto: pizzaData.coverPhoto,
+            name: pizzaData.name,
+            slug: pizzaData.slug,
+        };
+        checkout.addItem(currentPizza, CHECKOUT_CATEGORIES.PIZZA);
     };
 
     render() {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { uploadsUrl } from '../../config';
+import Checkout, { CHECKOUT_CATEGORIES } from '../../checkout/checkout';
 
 import './menu-item.styles.scss';
 
-const MenuItem = ({ item, category, addItemToCheckout }) => {
+const MenuItem = ({ item, category }) => {
     const photoUrl = `/uploads/${
         category === 'pizza' ? 'pizzas' : 'supplies'
     }/${item.coverPhoto}`;
@@ -31,10 +31,25 @@ const MenuItem = ({ item, category, addItemToCheckout }) => {
                 {category !== 'pizza' ? (
                     <span
                         className="add-checkout-btn"
-                        onClick={() => addItemToCheckout(item.id, 'products')}
+                        onClick={() => {
+                            const checkout = new Checkout();
+                            if (category === 'sosy') {
+                                checkout.addItem(
+                                    item,
+                                    CHECKOUT_CATEGORIES.SAUCE
+                                );
+                            } else if (category === 'napoje') {
+                                checkout.addItem(
+                                    item,
+                                    CHECKOUT_CATEGORIES.DRINK
+                                );
+                            } else {
+                                return;
+                            }
+                        }}
                     >
                         <FontAwesomeIcon icon={faShoppingCart} />
-                        &nbsp;Do koszyka
+                        &nbsp; Do koszyka
                     </span>
                 ) : (
                     <span className="add-checkout-btn">
