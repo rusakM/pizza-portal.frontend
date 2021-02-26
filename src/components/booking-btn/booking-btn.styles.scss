@@ -1,0 +1,21 @@
+.booking-btn {
+    background-color: #f5c537;
+    color: black;
+    padding: 15px;
+    border: solid 1px #f5c537;
+    border-radius: 2em;
+    font-size: 20px;
+    width: 40%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 2em;
+    margin-bottom: 1em;
+    @media (max-width: 1024px) {
+        width: 60%;
+    }
+    @media (max-width: 500px) {
+        width: 80%;
+        font-size: 1em;
+    }
+}

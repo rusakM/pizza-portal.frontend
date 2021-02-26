@@ -1,0 +1,11 @@
+.checkout-items-list {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 2em;
+    @media (max-width: 1024px) {
+        width: 100%;
+        margin-left: 0;
+    }
+}

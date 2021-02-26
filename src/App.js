@@ -6,6 +6,7 @@ import Header from './components/header/header.component';
 import Footer from './components/footer/footer.component';
 import LandingPage from './pages/landing-page/landing-page.component';
 import PizzaViewer from './pages/pizza-viewer/pizza-viewer.component';
+import CheckoutViewer from './pages/checkout-viewer/checkout-viewer.component';
 import Menu from './pages/menu-page/menu.component';
 import LoginPage from './pages/login-page/login-page.component';
 
@@ -104,6 +105,15 @@ class App extends React.Component {
                             />
                         )}
                         path="/login"
+                    />
+                    <Route
+                        component={() => (
+                            <CheckoutViewer
+                                currentUser={this.state.currentUser}
+                                history={this.props.history}
+                            />
+                        )}
+                        path="/checkout"
                     />
                 </Switch>
                 <Footer />

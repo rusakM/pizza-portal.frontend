@@ -1,0 +1,29 @@
+.checkout-viewer {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    margin-bottom: -80px;
+    .checkout-viewer-container {
+        margin-top: 110px;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        margin-left: 15%;
+        margin-bottom: 80px;
+        @media (max-width: 1024px) {
+            width: 90%;
+            margin-left: 5%;
+            margin-top: 80px;
+        }
+        .checkout-viewer-header {
+            display: flex;
+            .back-btn {
+                font-size: 1.5em;
+                margin-right: 1em;
+            }
+        }
+        .checkout {
+            margin-top: 2.5em;
+        }
+    }
+}

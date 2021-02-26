@@ -1,17 +1,15 @@
-const INITIAL_CHECKOUT = {
-    pizzas: [],
-    ownPiazzas: [],
-    drinks: [],
-    sauces: [],
-    paymentMethod: '',
-    paymentType: '',
-};
-
 export const CHECKOUT_CATEGORIES = {
     PIZZA: 'pizzas',
-    OWN_PIZZA: 'ownPizza',
+    OWN_PIZZA: 'ownPizzas',
     DRINK: 'drinks',
     SAUCE: 'sauces',
+};
+
+export const CHECKOUT_CATEGORIES_NAMES = {
+    pizzas: 'Pizze',
+    ownPiazzas: 'Własne pizze',
+    drinks: 'Napoje',
+    sauces: 'Sosy',
 };
 
 export const PAYMENT_METHODS = {
@@ -22,6 +20,15 @@ export const PAYMENT_METHODS = {
 export const PAYMENT_TYPES = {
     IN_ADVANCE: 'z góry',
     ON_DELIVERY: 'przy odbiorze',
+};
+
+const INITIAL_CHECKOUT = {
+    pizzas: [],
+    ownPiazzas: [],
+    drinks: [],
+    sauces: [],
+    paymentMethod: PAYMENT_METHODS.CARD,
+    paymentType: PAYMENT_TYPES.IN_ADVANCE,
 };
 
 class Checkout {
@@ -38,27 +45,60 @@ class Checkout {
     };
 
     addItem = (item, category) => {
-        this.checkout[category].push(item);
+        let isItemInCheckout = false;
+        this.checkout[category].forEach((product, i) => {
+            if (item._id === product._id) {
+                isItemInCheckout = true;
+                this.checkout[category][i].count++;
+            }
+        });
+        if (!isItemInCheckout) {
+            this.checkout[category].push({
+                ...item,
+                count: 1,
+            });
+        }
         this.checkoutItems++;
         this.saveCheckoutToSessionStorage();
     };
 
     removeItem = (id, category) => {
         let index = null;
+        let count = 0;
         this.checkout[category].forEach((item, i) => {
-            if (item.id === id) {
+            if (item._id === id) {
                 index = i;
+                count = item.count;
             }
         });
-        this.checkout[category].splice(index, 1);
+        if (count > 1) {
+            this.checkout[category][index].count--;
+        } else {
+            this.checkout[category].splice(index, 1);
+        }
         this.checkoutItems--;
         this.saveCheckoutToSessionStorage();
+    };
+
+    clearItem = (id, category) => {
+        let index = null;
+        let count = 0;
+        this.checkout[category].forEach((item, i) => {
+            if (item._id === id) {
+                index = i;
+                count = item.count;
+            }
+        });
+        if (index >= 0 && count > 0) {
+            this.checkout[category].splice(index, 1);
+            this.checkoutItems -= count;
+            this.saveCheckoutToSessionStorage();
+        }
     };
 
     clearCheckout = () => {
         this.checkout = INITIAL_CHECKOUT;
         this.checkoutItems = 0;
-        this.checkoutValue = 0;
         this.saveCheckoutToSessionStorage();
     };
 
@@ -74,10 +114,16 @@ class Checkout {
 
     getCheckoutValue = () => {
         let value = 0;
-        this.checkout.pizzas.forEach((pizza) => (value += pizza.price));
-        this.checkout.ownPiazzas.forEach((pizza) => (value += pizza.price));
-        this.checkout.sauces.forEach((sauce) => (value += sauce.price));
-        this.checkout.drinks.forEach((drink) => (value += drink.price));
+        let c = Object.values(CHECKOUT_CATEGORIES);
+        for (let i = 0; i < c.length; i++) {
+            if (!this.checkout[c[i]]) {
+                continue;
+            }
+            for (let j = 0; j < this.checkout[c[i]].length; j++) {
+                const { count, price } = this.checkout[c[i]][j];
+                value += count * price;
+            }
+        }
 
         return value;
     };
@@ -96,17 +142,25 @@ class Checkout {
             paymentType: this.checkout.paymentType,
         };
         this.checkout.pizzas.forEach((pizza) => {
-            booking.pizzas.push(pizza.id);
-            booking.templates.push(pizza.template.id);
+            for (let i = 0; i < pizza.count; i++) {
+                booking.pizzas.push(pizza.id);
+                booking.templates.push(pizza.template.id);
+            }
         });
         this.checkout.ownPiazzas.forEach((pizza) => {
-            booking.pizzas.push(pizza.id);
+            for (let i = 0; i < pizza.count; i++) {
+                booking.pizzas.push(pizza.id);
+            }
         });
         this.checkout.drinks.forEach((drink) => {
-            booking.products.push(drink.id);
+            for (let i = 0; i < drink.count; i++) {
+                booking.products.push(drink.id);
+            }
         });
         this.checkout.sauces.forEach((sauce) => {
-            booking.products.push(sauce.id);
+            for (let i = 0; i < sauce.count; i++) {
+                booking.products.push(sauce.id);
+            }
         });
 
         return booking;
