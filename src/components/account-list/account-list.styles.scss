@@ -1,0 +1,12 @@
+.account-list {
+    width: 250px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+    ul {
+        padding-top: 5em;
+        list-style-type: none;
+    }
+}

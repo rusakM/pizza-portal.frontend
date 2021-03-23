@@ -9,6 +9,7 @@ import PizzaViewer from './pages/pizza-viewer/pizza-viewer.component';
 import CheckoutViewer from './pages/checkout-viewer/checkout-viewer.component';
 import Menu from './pages/menu-page/menu.component';
 import LoginPage from './pages/login-page/login-page.component';
+import AccountViewer from './pages/account/account.component';
 
 class App extends React.Component {
     constructor() {
@@ -114,6 +115,15 @@ class App extends React.Component {
                             />
                         )}
                         path="/checkout"
+                    />
+                    <Route
+                        component={() => (
+                            <AccountViewer
+                                currentUser={this.state.currentUser}
+                                history={this.props.history}
+                            />
+                        )}
+                        path="/myAccount"
                     />
                 </Switch>
                 <Footer />

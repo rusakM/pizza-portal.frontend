@@ -1,0 +1,13 @@
+.account-viewer {
+    min-height: 100vh;
+    margin-bottom: -80px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    .account-viewer-container {
+        width: 100%;
+        margin-top: 110px;
+        margin-bottom: 80px;
+        display: flex;
+    }
+}
