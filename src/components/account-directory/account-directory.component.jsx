@@ -1,6 +1,7 @@
 import React from 'react';
 import LIST_DATA from '../account-list/account-list.data';
 import Settings from '../settings/settings.component';
+import ChangePassword from '../change-password/change-password.component';
 import './account-directory.styles.scss';
 
 const AccountDirectory = ({ componentName }) => {
@@ -8,6 +9,9 @@ const AccountDirectory = ({ componentName }) => {
     switch (componentName) {
         case LIST_DATA[0].link:
             Component = <Settings />;
+            break;
+        case LIST_DATA[4].link:
+            Component = <ChangePassword />;
             break;
         default:
             Component = <Settings />;

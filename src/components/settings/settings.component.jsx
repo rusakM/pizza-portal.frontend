@@ -1,6 +1,8 @@
 import React, { createRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import UserInput from '../user-input/user-input.component';
+import UserButton from '../user-button/user-button.component';
 import axios from 'axios';
 
 import './settings.styles.scss';
@@ -107,7 +109,7 @@ class Settings extends React.Component {
     render() {
         const { currentUser } = this.state;
         return (
-            <div>
+            <div className="account-container">
                 <div className="user-photo-container">
                     <img
                         src={`/uploads/users/${
@@ -119,14 +121,11 @@ class Settings extends React.Component {
                         ref={this.photoRef}
                     />
                     <div className="user-photo-buttons-wrapper">
-                        <span
-                            className="save-btn"
-                            onClick={this.openFileDialog}
-                        >
+                        <UserButton onClick={this.openFileDialog}>
                             {this.state.isLoadedPhoto ? 'Zapisz' : 'Zmień'}
-                        </span>
-                        <span
-                            className="save-btn trash-btn"
+                        </UserButton>
+                        <UserButton
+                            additionalClass="trash-btn"
                             onClick={this.resetPhoto}
                         >
                             {this.state.isLoadedPhoto ? (
@@ -134,7 +133,7 @@ class Settings extends React.Component {
                             ) : (
                                 <FontAwesomeIcon icon={faTrashAlt} />
                             )}
-                        </span>
+                        </UserButton>
                     </div>
                 </div>
                 <form
@@ -150,27 +149,23 @@ class Settings extends React.Component {
                     />
                 </form>
                 <form className="user-data-form">
-                    <div className="user-input-wrapper">
-                        <label>Imię:</label>
-                        <input
-                            type="text"
-                            className="user-input"
-                            value={this.state.nameInput}
-                            onChange={this.inputHandler}
-                            name="nameInput"
-                        />
-                    </div>
-                    <div className="user-input-wrapper">
-                        <label>Email:</label>
-                        <input
-                            type="text"
-                            className="user-input"
-                            value={this.state.emailInput}
-                            onChange={this.inputHandler}
-                            name="emailInput"
-                        />
-                    </div>
-                    <button className="save-btn">Zapisz zmiany</button>
+                    <UserInput
+                        type="text"
+                        value={this.state.nameInput}
+                        onChange={this.inputHandler}
+                        name="nameInput"
+                    >
+                        Imię:
+                    </UserInput>
+                    <UserInput
+                        type="text"
+                        value={this.state.emailInput}
+                        onChange={this.inputHandler}
+                        name="emailInput"
+                    >
+                        Email:
+                    </UserInput>
+                    <UserButton>Zapisz zmiany</UserButton>
                 </form>
             </div>
         );
