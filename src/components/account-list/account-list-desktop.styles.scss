@@ -1,0 +1,6 @@
+.account-list-desktop {
+    display: flex;
+    @media (max-width: 1024px) {
+        display: none;
+    }
+}

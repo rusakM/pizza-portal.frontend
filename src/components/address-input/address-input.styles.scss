@@ -1,0 +1,20 @@
+.address-input {
+    border: none;
+    color: #888;
+    background-color: transparent;
+    padding: 0.5em;
+    margin: 5px;
+    min-width: 50px;
+    @media (max-width: 480px) {
+        width: 100%;
+    }
+}
+.address-input-active {
+    border: 1px solid #f5c537;
+    border-radius: 0.25em;
+    color: black;
+}
+.invalid-input {
+    border-color: tomato;
+    color: maroon;
+}

@@ -3,18 +3,19 @@ import React from 'react';
 import AccountListItem from '../account-list-item/account-list-item.component';
 import ACCOUNT_LIST_DATA from './account-list.data';
 import './account-list.styles.scss';
+import './account-list-desktop.styles.scss';
 
 const AccountList = ({ activeElement }) => {
     return (
-        <div className="account-list">
+        <div className="account-list account-list-desktop">
             <ul>
-                {ACCOUNT_LIST_DATA.map((item, i) => (
+                {ACCOUNT_LIST_DATA.map(({ link, name }, i) => (
                     <AccountListItem
-                        link={item.link}
+                        link={link}
                         key={i}
-                        isActive={activeElement === item.link ? true : false}
+                        isActive={activeElement === link ? true : false}
                     >
-                        {item.name}
+                        {name}
                     </AccountListItem>
                 ))}
             </ul>

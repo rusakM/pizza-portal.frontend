@@ -1,0 +1,25 @@
+.address-viewer {
+    width: 100%;
+    h1 {
+        padding: 1em;
+    }
+    .addresses-wrapper {
+        width: 60%;
+        margin-left: 20%;
+        margin-top: 1em;
+        @media (max-width: 1024px) {
+            width: 90%;
+            margin-left: 5%;
+        }
+        @media (max-width: 480px) {
+            width: 95%;
+            margin-left: 2.5%;
+        }
+        .address-new {
+            margin-left: 1em;
+        }
+        .addresses-container {
+            margin-top: 2em;
+        }
+    }
+}
