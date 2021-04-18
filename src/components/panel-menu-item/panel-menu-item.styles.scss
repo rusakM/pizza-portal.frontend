@@ -1,25 +1,26 @@
 .panel-menu-item {
-  font-size: 1.5em;
-  margin: 0.5em 0.5em;
-  cursor: pointer;
-  &:hover {
-    color: #444;
-    animation: animate-panel-menu-item;
-    animation-duration: 2.5s;
-  }
-  a {
-    text-decoration: none;
-    color: #444;
-  }
+    font-size: 1.5em;
+    margin: 0.5em 0.5em;
+    cursor: pointer;
+    &:hover {
+        color: #444;
+        animation: animate-panel-menu-item;
+        animation-duration: 2.5s;
+    }
+    a,
+    span {
+        text-decoration: none;
+        color: #444;
+    }
 }
 @keyframes animate-panel-menu-item {
-  0% {
-    font-size: 1.5em;
-  }
-  15% {
-    font-size: 2em;
-  }
-  100% {
-    font-size: 1.5em;
-  }
+    0% {
+        font-size: 1.5em;
+    }
+    15% {
+        font-size: 2em;
+    }
+    100% {
+        font-size: 1.5em;
+    }
 }

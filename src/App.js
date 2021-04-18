@@ -10,21 +10,15 @@ import CheckoutViewer from './pages/checkout-viewer/checkout-viewer.component';
 import Menu from './pages/menu-page/menu.component';
 import LoginPage from './pages/login-page/login-page.component';
 import AccountViewer from './pages/account/account.component';
+import userStorageManager from './userStorageManager/userStorageManager';
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            currentUser: null,
+            currentUser: userStorageManager.getCurrentUser() || null,
+            expiryTime: userStorageManager.getExpirationTime(),
         };
-    }
-
-    componentDidMount() {
-        if (!this.state.currentUser) {
-            const currentUser =
-                JSON.parse(localStorage.getItem('currentUser')) || null;
-            this.setState({ currentUser });
-        }
     }
 
     login = (email, password) => {
@@ -37,13 +31,17 @@ class App extends React.Component {
             },
         })
             .then((response) => {
-                this.setState({
-                    currentUser: response.data.data.user,
-                    token: response.data.token,
-                });
-                localStorage.setItem(
-                    'currentUser',
-                    JSON.stringify(response.data.data.user)
+                this.setState(
+                    {
+                        currentUser: response.data.data.user,
+                        expiryTime: response.data.tokenExpires,
+                    },
+                    () => {
+                        userStorageManager.setNewLogin(
+                            this.state.currentUser,
+                            this.state.expiryTime
+                        );
+                    }
                 );
                 this.props.history.push('/');
             })
@@ -57,17 +55,41 @@ class App extends React.Component {
             data,
         })
             .then((response) => {
-                this.setState({
-                    currentUser: response.data.data.user,
-                    token: response.data.token,
-                });
-                localStorage.setItem(
-                    'currentUser',
-                    JSON.stringify(response.data.data.user)
+                this.setState(
+                    {
+                        currentUser: response.data.data.user,
+                        expiryTime: response.data.tokenExpires,
+                    },
+                    () => {
+                        userStorageManager.setNewLogin(
+                            this.state.currentUser,
+                            this.state.expiryTime
+                        );
+                    }
                 );
                 this.props.history.push('/');
             })
             .catch((error) => console.log(error));
+    };
+
+    logout = async () => {
+        try {
+            await axios({
+                url: '/api/users/logout',
+                method: 'GET',
+            });
+            this.setState(
+                {
+                    currentUser: null,
+                    expiryTime: null,
+                },
+                () => {
+                    userStorageManager.logOut();
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     render() {
@@ -76,6 +98,7 @@ class App extends React.Component {
                 <Header
                     currentUser={this.state.currentUser}
                     history={this.props.history}
+                    logout={this.logout}
                 />
                 <Switch>
                     <Route exact component={LandingPage} path="/" />

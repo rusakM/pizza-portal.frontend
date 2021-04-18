@@ -1,28 +1,29 @@
 .header-menu-item {
-  color: #444;
-  background-color: transparent;
-  font-size: 1.5em;
-  margin: 0 1em;
-  cursor: pointer;
-  &:hover {
-    color: black;
-    animation: animate-header-menu-item;
-    animation-duration: 2s;
-  }
-  a {
-    text-decoration: none;
     color: #444;
-  }
+    background-color: transparent;
+    font-size: 1.5em;
+    margin: 0 1em;
+    cursor: pointer;
+    &:hover {
+        color: black;
+        animation: animate-header-menu-item;
+        animation-duration: 2s;
+    }
+    a,
+    span {
+        text-decoration: none;
+        color: #444;
+    }
 }
 
 @keyframes animate-header-menu-item {
-  0% {
-    font-size: 1.5em;
-  }
-  50% {
-    font-size: 1.55em;
-  }
-  100% {
-    font-size: 1.5em;
-  }
+    0% {
+        font-size: 1.5em;
+    }
+    50% {
+        font-size: 1.55em;
+    }
+    100% {
+        font-size: 1.5em;
+    }
 }

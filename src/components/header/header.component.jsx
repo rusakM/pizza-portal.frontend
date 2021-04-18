@@ -6,7 +6,7 @@ import HeaderMenuItem from '../header-menu-item/header-menu-item.component';
 import PanelMenu from '../panel-menu/panel-menu.component';
 import './header.styles.scss';
 
-const Header = ({ currentUser, history, items }) => {
+const Header = ({ currentUser, history, items, logout }) => {
     const panelRef = createRef();
     return (
         <header>
@@ -30,7 +30,9 @@ const Header = ({ currentUser, history, items }) => {
                     </HeaderMenuItem>
                 ) : null}
                 {currentUser ? (
-                    <HeaderMenuItem link="#">Wyloguj</HeaderMenuItem>
+                    <li className="header-menu-item" onClick={logout}>
+                        <span>Wyloguj</span>
+                    </li>
                 ) : null}
             </ul>
             <span
@@ -41,7 +43,11 @@ const Header = ({ currentUser, history, items }) => {
             >
                 <FontAwesomeIcon icon={faBars} />
             </span>
-            <PanelMenu reference={panelRef} currentUser={currentUser} />
+            <PanelMenu
+                reference={panelRef}
+                currentUser={currentUser}
+                logout={logout}
+            />
         </header>
     );
 };
