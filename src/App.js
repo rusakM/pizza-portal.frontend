@@ -10,6 +10,7 @@ import CheckoutViewer from './pages/checkout-viewer/checkout-viewer.component';
 import Menu from './pages/menu-page/menu.component';
 import LoginPage from './pages/login-page/login-page.component';
 import AccountViewer from './pages/account/account.component';
+import PizzaCreator from './pages/pizza-creator/pizza-creator.component';
 import userStorageManager from './userStorageManager/userStorageManager';
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
             currentUser: userStorageManager.getCurrentUser() || null,
             expiryTime: userStorageManager.getExpirationTime(),
         };
+        this.timeout = null;
     }
 
     login = (email, password) => {
@@ -111,6 +113,15 @@ class App extends React.Component {
                             />
                         )}
                         path="/menu"
+                    />
+                    <Route
+                        component={() => (
+                            <PizzaCreator
+                                history={this.props.history}
+                                currentUser={this.state.currentUser}
+                            />
+                        )}
+                        path="/pizza-creator"
                     />
                     <Route
                         component={() => (

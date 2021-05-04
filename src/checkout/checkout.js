@@ -24,7 +24,7 @@ export const PAYMENT_TYPES = {
 
 const INITIAL_CHECKOUT = {
     pizzas: [],
-    ownPiazzas: [],
+    ownPizzas: [],
     drinks: [],
     sauces: [],
     paymentMethod: PAYMENT_METHODS.CARD,
