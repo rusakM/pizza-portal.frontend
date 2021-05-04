@@ -9,6 +9,7 @@ import PizzaPreviewBox from '../../components/pizza-preview-box/pizza-preview-bo
 import PizzaCreatorIngredientsList from '../../components/pizza-creator-ingredients-list/pizza-creator-ingredients-list.component';
 import './pizza-creator.styles.scss';
 import UserButton from '../../components/user-button/user-button.component';
+import LoadingScreen from '../../components/loading-screen/loading-screen.component';
 
 class PizzaCreator extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class PizzaCreator extends React.Component {
                 ingredients: [],
                 size: 24,
             },
+            isLoading: true,
         };
     }
 
@@ -51,6 +53,7 @@ class PizzaCreator extends React.Component {
                 basicPrices: prices,
                 price: prices[0],
                 ...pizzaFromId,
+                isLoading: false,
             };
             if (pizzaFromId) {
                 newState.defaultPizza = {
@@ -187,6 +190,7 @@ class PizzaCreator extends React.Component {
     render() {
         return (
             <div className="pizza-viewer">
+                {this.state.isLoading && <LoadingScreen />}
                 <div className="pizza-viewer-container">
                     <div className="pizza-viewer-header">
                         <span
