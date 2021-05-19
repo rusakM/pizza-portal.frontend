@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -207,7 +207,10 @@ class PizzaCreator extends React.Component {
                                 : 'Stwórz Pizzę'}
                         </h2>
                     </div>
-                    <PizzaPreviewBox ingredientsList={this.state.ingredients} />
+                    <PizzaPreviewBox
+                        ingredientsList={this.state.ingredients}
+                        imgPath="pizza-creator"
+                    />
                     <h1 className="pizza-viewer-price">
                         {`${this.calculatePrice()} zł`}
                     </h1>
