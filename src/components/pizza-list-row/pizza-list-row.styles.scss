@@ -33,29 +33,4 @@
             }
         }
     }
-
-    .ingredient-thumbnail {
-        width: 150px;
-        height: 150px;
-        margin-left: -150px;
-
-        @media (max-width: 500px) {
-            transform: translateX(-50%);
-            width: 100px;
-            height: 100px;
-            margin-left: -100px;
-        }
-    }
-    .default-img-thumbnail {
-        width: 150px;
-        height: 150px;
-        margin-left: 1em;
-
-        @media (max-width: 500px) {
-            margin-left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 100px;
-        }
-    }
 }

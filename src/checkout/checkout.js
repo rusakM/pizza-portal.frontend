@@ -7,7 +7,7 @@ export const CHECKOUT_CATEGORIES = {
 
 export const CHECKOUT_CATEGORIES_NAMES = {
     pizzas: 'Pizze',
-    ownPiazzas: 'Własne pizze',
+    ownPizzas: 'Własne pizze',
     drinks: 'Napoje',
     sauces: 'Sosy',
 };
