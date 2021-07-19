@@ -12,23 +12,11 @@ export const CHECKOUT_CATEGORIES_NAMES = {
     sauces: 'Sosy',
 };
 
-export const PAYMENT_METHODS = {
-    CASH: 'gotówka',
-    CARD: 'karta',
-};
-
-export const PAYMENT_TYPES = {
-    IN_ADVANCE: 'z góry',
-    ON_DELIVERY: 'przy odbiorze',
-};
-
 const INITIAL_CHECKOUT = {
     pizzas: [],
     ownPizzas: [],
     drinks: [],
     sauces: [],
-    paymentMethod: PAYMENT_METHODS.CARD,
-    paymentType: PAYMENT_TYPES.IN_ADVANCE,
 };
 
 class Checkout {
@@ -102,16 +90,6 @@ class Checkout {
         this.saveCheckoutToSessionStorage();
     };
 
-    setPaymentType = (paymentType) => {
-        this.checkout.paymentType = paymentType;
-        this.saveCheckoutToSessionStorage();
-    };
-
-    setPaymentMethod = (paymentMethod) => {
-        this.checkout.paymentMethod = paymentMethod;
-        this.saveCheckoutToSessionStorage();
-    };
-
     getCheckoutValue = () => {
         let value = 0;
         let c = Object.values(CHECKOUT_CATEGORIES);
@@ -124,44 +102,47 @@ class Checkout {
                 value += count * price;
             }
         }
-
-        return value;
+        return Math.round(value * 100) / 100;
     };
 
-    createBooking = () => {
+    createBooking = (address, isWithDelivery, isTakeAway, isPayNow) => {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!currentUser) {
             return null;
         }
         const booking = {
-            pizzas: [],
-            products: [],
-            templates: [],
-            user: currentUser.id,
-            paymentMethod: this.checkout.paymentMethod,
-            paymentType: this.checkout.paymentType,
+            isWithDelivery,
+            isTakeAway,
+            isPayNow,
         };
-        this.checkout.pizzas.forEach((pizza) => {
-            for (let i = 0; i < pizza.count; i++) {
-                booking.pizzas.push(pizza.id);
-                booking.templates.push(pizza.template.id);
+        booking.user = currentUser._id;
+
+        const categories = Object.values(CHECKOUT_CATEGORIES);
+
+        for (let category of categories) {
+            console.log(category);
+            const items = [];
+            const templates = [];
+            for (let item of this.checkout[category]) {
+                console.log(item._id);
+                for (let k = 0; k < item.count; k++) {
+                    console.log(k);
+                    items.push(item._id);
+                    if (category === CHECKOUT_CATEGORIES.PIZZA) {
+                        templates.push(item.template.id);
+                    }
+                }
             }
-        });
-        this.checkout.ownPiazzas.forEach((pizza) => {
-            for (let i = 0; i < pizza.count; i++) {
-                booking.pizzas.push(pizza.id);
+            if (items.length > 0) {
+                booking[category] = items;
             }
-        });
-        this.checkout.drinks.forEach((drink) => {
-            for (let i = 0; i < drink.count; i++) {
-                booking.products.push(drink.id);
+            if (templates.length > 0) {
+                booking.templates = templates;
             }
-        });
-        this.checkout.sauces.forEach((sauce) => {
-            for (let i = 0; i < sauce.count; i++) {
-                booking.products.push(sauce.id);
-            }
-        });
+        }
+        if (address) {
+            booking.address = address._id;
+        }
 
         return booking;
     };

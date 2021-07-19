@@ -3,9 +3,12 @@ import { ReactComponent as Pizza } from './pizza.svg';
 
 import './loading-screen.styles.scss';
 
-const LoadingScreen = () => (
+const LoadingScreen = ({ children }) => (
     <div className="loading-screen">
-        <Pizza className="loading-screen-icon" />
+        <div className="loading-screen-wrapper">
+            <Pizza className="loading-screen-icon" />
+            {children && <p>{children}</p>}
+        </div>
     </div>
 );
 

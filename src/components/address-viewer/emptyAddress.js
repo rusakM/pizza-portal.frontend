@@ -3,7 +3,7 @@ const EMPTY_ADDRESS = {
     street: '',
     zipCode: '',
     houseNumber: '',
-    isDefault: '',
+    isDefault: false,
     phoneNumber: '',
     flatNumber: '',
 };

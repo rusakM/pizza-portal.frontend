@@ -160,14 +160,14 @@ class PizzaCreator extends React.Component {
         try {
             if (this.state.pizzaId) {
                 const pizza = await axios({
-                    url: `/api/pizzas/${this.state.pizzaId}`,
+                    url: `/api/pizzas/myPizzas/${this.state.pizzaId}`,
                     method: 'PATCH',
                     data: newPizza,
                 });
                 return pizza.data.data.data;
             }
             const pizza = await axios({
-                url: '/api/pizzas',
+                url: '/api/pizzas/myPizzas',
                 method: 'POST',
                 data: {
                     ...newPizza,

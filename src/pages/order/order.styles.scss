@@ -1,0 +1,62 @@
+.order-viewer {
+    min-height: 100vh;
+    margin-bottom: -80px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .order-viewer-container {
+        width: 100%;
+        margin-top: 110px;
+        margin-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        @media (max-width: 1024px) {
+            margin-top: 80px;
+        }
+        .order-viewer-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            .back-btn {
+                margin-left: 1em;
+                font-size: 2.5em;
+                position: relative;
+                z-index: 6;
+                @media (max-width: 500px) {
+                    margin-left: 0.5em;
+                }
+            }
+            h2 {
+                font-size: 2.5em;
+                position: relative;
+                width: 100%;
+                text-align: center;
+
+                @media (max-width: 500px) {
+                    font-size: 1.5em;
+                }
+            }
+        }
+        .order-viewer-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .form-row {
+                .form-row-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                }
+            }
+        }
+    }
+}
+
+.white-btn {
+    background-color: white;
+}
+.white-btn,
+.form-btn {
+    border-width: 4px;
+}

@@ -60,6 +60,7 @@ class CheckoutViewer extends React.Component {
                                     remove={this.remove}
                                     clear={this.clear}
                                     category={item}
+                                    key={item}
                                 />
                             ) : null
                         )}
@@ -72,9 +73,7 @@ class CheckoutViewer extends React.Component {
                             </b>
                         </p>
                     </div>
-                    <BookingBtn link="/booking">
-                        Przejdź do zamówienia
-                    </BookingBtn>
+                    <BookingBtn link="/order">Przejdź do zamówienia</BookingBtn>
                 </div>
             </div>
         );

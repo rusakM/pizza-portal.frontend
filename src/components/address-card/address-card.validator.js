@@ -39,6 +39,13 @@ const AddressCardValidator = {
             .map((key) => validators[key].test(address[key]))
             .reduce((test, key) => test && key);
     },
+    logValidators: function (address) {
+        const keys = Object.keys(address);
+        keys.forEach((item) => {
+            const val = address[item];
+            console.log(item, this.validate(item, val));
+        });
+    },
 };
 
 export default AddressCardValidator;

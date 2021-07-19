@@ -96,7 +96,9 @@ class AddressViewer extends React.Component {
                 addresses,
                 isCreatingAddress: false,
             });
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     showError = () => {};

@@ -6,22 +6,32 @@
     height: 100vh;
     z-index: 10;
     background-color: #f5c537;
-    .loading-screen-icon {
-        position: relative;
-        width: 10%;
-        left: 45%;
+    .loading-screen-wrapper {
+        width: 100%;
         top: 40%;
-        animation-name: loading-pizza;
-        animation-duration: 2.5s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        @media (max-width: 1024px) {
-            width: 20%;
-            left: 40%;
+        position: relative;
+        .loading-screen-icon {
+            position: relative;
+            width: 10%;
+            left: 45%;
+            animation-name: loading-pizza;
+            animation-duration: 2.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            @media (max-width: 1024px) {
+                width: 20%;
+                left: 40%;
+            }
+            @media (max-width: 480px) {
+                width: 25%;
+                left: 37.5%;
+            }
         }
-        @media (max-width: 480px) {
-            width: 25%;
-            left: 37.5%;
+
+        & > p {
+            text-align: center;
+            margin-top: 1.5em;
+            font-size: large;
         }
     }
 

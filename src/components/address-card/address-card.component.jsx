@@ -24,7 +24,7 @@ class AddressCard extends React.Component {
             houseNumber: props.address.houseNumber || '',
             flatNumber: props.address.flatNumber || '',
             phoneNumber: props.address.phoneNumber || '',
-            isDefault: props.address.isDefault || false,
+            isDefault: props.address.isDefault ? true : false,
         };
 
         this.initialState = this.state;
@@ -36,6 +36,7 @@ class AddressCard extends React.Component {
                 isDefault: props.address.isDefault,
             };
         }
+        return null;
     }
 
     changeHandler = (event) => {
@@ -115,7 +116,9 @@ class AddressCard extends React.Component {
             <div className="address-card">
                 <form
                     className={
-                        (this.state.isDefault || isEditing) && 'address-default'
+                        this.state.isDefault || isEditing
+                            ? 'address-default'
+                            : ''
                     }
                 >
                     {isEditing && <h2>Nowy adres:</h2>}
@@ -179,15 +182,19 @@ class AddressCard extends React.Component {
                     <div className="address-card-row address-card-row-wrap">
                         {isEditing && (
                             <UserButton
-                                onClick={() => {
+                                onClick={async () => {
                                     const changes = this.getChanges();
                                     if (
                                         AddressCardValidator.validateBeforeSave(
                                             changes
                                         )
                                     ) {
-                                        this.props.save(changes, _id, num);
-                                        this.toggleEdit();
+                                        await this.props.save(
+                                            changes,
+                                            _id,
+                                            num
+                                        );
+                                        //this.toggleEdit();
                                     }
                                 }}
                                 additionalClass="address-button"

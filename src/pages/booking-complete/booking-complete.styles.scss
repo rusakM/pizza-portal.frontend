@@ -1,0 +1,28 @@
+.booking-complete {
+    min-height: 100vh;
+    margin-bottom: -80px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .booking-complete-container {
+        position: relative;
+        width: 100%;
+        margin-top: 110px;
+        margin-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @media (max-width: 1024px) {
+            margin-top: 80px;
+            width: 95%;
+            left: 2.5%;
+        }
+        & > * {
+            margin-top: 1em;
+        }
+        h1 {
+            padding-top: 2.5em;
+        }
+    }
+}

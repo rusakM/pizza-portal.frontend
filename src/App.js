@@ -12,6 +12,8 @@ import LoginPage from './pages/login-page/login-page.component';
 import AccountViewer from './pages/account/account.component';
 import PizzaCreator from './pages/pizza-creator/pizza-creator.component';
 import userStorageManager from './userStorageManager/userStorageManager';
+import Order from './pages/order/order.component';
+import BookingComplete from './pages/booking-complete/booking-complete.component';
 
 class App extends React.Component {
     constructor() {
@@ -158,6 +160,21 @@ class App extends React.Component {
                             />
                         )}
                         path="/myAccount"
+                    />
+                    <Route
+                        component={() => (
+                            <Order
+                                currentUser={this.state.currentUser}
+                                history={this.props.history}
+                            />
+                        )}
+                        path="/order"
+                    />
+                    <Route
+                        component={() => (
+                            <BookingComplete history={this.props.history} />
+                        )}
+                        path="/booking-complete/:id"
                     />
                 </Switch>
                 <Footer />
