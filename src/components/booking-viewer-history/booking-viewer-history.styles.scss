@@ -1,0 +1,51 @@
+.booking-viewer-history {
+    position: relative;
+    width: 100%;
+    h2 {
+        text-align: center;
+        padding: 1.5em;
+    }
+
+    .booking-viewer-history-wrapper {
+        position: inherit;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+
+        .booking-viewer-history-arrow {
+            width: 40%;
+            text-align: center;
+            @media (max-width: 480px) {
+                width: 30%;
+            }
+            svg {
+                fill: #f5c537;
+                width: 200px;
+                height: 200px;
+                @media (max-width: 1024px) {
+                    width: 150px;
+                    height: 150px;
+                }
+
+                @media (max-width: 480px) {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+        }
+
+        .booking-viewer-history-list {
+            width: 60%;
+            @media (max-width: 480px) {
+                width: 70%;
+            }
+        }
+    }
+
+    .booking-viewer-history-refresh {
+        text-align: center;
+        padding-bottom: 3em;
+        padding-top: 1.5em;
+    }
+}

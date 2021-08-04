@@ -1,6 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import LIST_DATA from '../../components/account-list/account-list.data';
 import AccountList from '../../components/account-list/account-list.component';
 import AccountListMobile from '../../components/account-list-mobile/account-list-mobile.component';
 import AccountDirectory from '../../components/account-directory/account-directory.component';

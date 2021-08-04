@@ -14,6 +14,7 @@ import PizzaCreator from './pages/pizza-creator/pizza-creator.component';
 import userStorageManager from './userStorageManager/userStorageManager';
 import Order from './pages/order/order.component';
 import BookingComplete from './pages/booking-complete/booking-complete.component';
+import BookingViewer from './pages/booking-viewer/booking-viewer.component';
 
 class App extends React.Component {
     constructor() {
@@ -151,6 +152,12 @@ class App extends React.Component {
                             />
                         )}
                         path="/checkout"
+                    />
+                    <Route
+                        component={() => (
+                            <BookingViewer history={this.props.history} />
+                        )}
+                        path="/myAccount/orders/:id"
                     />
                     <Route
                         component={() => (

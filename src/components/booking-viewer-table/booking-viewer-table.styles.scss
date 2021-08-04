@@ -1,0 +1,39 @@
+.booking-viewer-table {
+    width: 100%;
+    position: relative;
+    padding-top: 3em;
+
+    .booking-viewer-table-finished {
+        width: 100%;
+        text-align: center;
+        background-color: #f5c537;
+        padding: 0.75em 0;
+    }
+
+    .booking-viewer-table-wrapper {
+        position: inherit;
+        width: 90%;
+        left: 5%;
+
+        @media (max-width: 480px) {
+            width: 95%;
+            left: 2.5%;
+        }
+
+        .booking-viewer-table-category {
+            position: inherit;
+            width: 100%;
+
+            .booking-viewer-table-category-name {
+                padding: 1.5em;
+            }
+        }
+
+        .booking-viewer-table-summary {
+            padding: 1em 1.5em;
+            text-align: right;
+            border-top: #f5c537 solid 3px;
+            margin-top: 1em;
+        }
+    }
+}
