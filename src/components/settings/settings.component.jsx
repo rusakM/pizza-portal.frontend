@@ -42,7 +42,7 @@ class Settings extends React.Component {
         } else {
             if (file.files[0]) {
                 const formData = new FormData();
-                formData.append('coverPhoto', file.files[0]);
+                formData.append('photo', file.files[0]);
 
                 await this.sendUserChanges(formData, {
                     'Content-Type': 'multipart/form-data',
@@ -79,7 +79,7 @@ class Settings extends React.Component {
         event.preventDefault();
         const { files } = event.target;
 
-        const isLoadedPhoto = event.target.files.length > 0 ? true : false;
+        const isLoadedPhoto = files.length > 0 ? true : false;
         this.setState({ isLoadedPhoto });
     };
 
@@ -165,7 +165,19 @@ class Settings extends React.Component {
                     >
                         Email:
                     </UserInput>
-                    <UserButton>Zapisz zmiany</UserButton>
+                    <UserButton
+                        onClick={async () =>
+                            await this.sendUserChanges(
+                                {
+                                    name: this.state.nameInput,
+                                    email: this.state.emailInput,
+                                },
+                                {}
+                            )
+                        }
+                    >
+                        Zapisz zmiany
+                    </UserButton>
                 </form>
             </div>
         );
