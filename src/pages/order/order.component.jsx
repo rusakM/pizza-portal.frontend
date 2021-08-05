@@ -11,6 +11,7 @@ import CustomAlert from '../../components/custom-alert/custom-alert.component';
 import AddressCard from '../../components/address-card/address-card.component';
 import LoadingScreen from '../../components/loading-screen/loading-screen.component';
 import EMPTY_ADDRESS from '../../components/address-viewer/emptyAddress';
+import formatPrice from '../../utils/formatPrice';
 import { stripePk } from '../../config';
 
 import './order.styles.scss';
@@ -34,13 +35,22 @@ class Order extends React.Component {
     async componentDidMount() {
         console.log(document.domain);
         try {
-            const addresses = await axios({
+            let addresses = await axios({
                 method: 'GET',
                 url: '/api/users/getMyAddress',
             });
-            if (addresses.data.data.data.length > 0) {
+            addresses = addresses.data.data.data;
+            if (addresses.length > 0) {
+                let selectedAddressId = 0;
+                for (let i = 0; i < addresses.length; i++) {
+                    if (addresses[i].isDefault) {
+                        selectedAddressId = i;
+                        break;
+                    }
+                }
                 this.setState({
-                    addresses: addresses.data.data.data,
+                    addresses,
+                    selectedAddressId,
                 });
             }
         } catch (error) {}
@@ -119,11 +129,26 @@ class Order extends React.Component {
         });
     };
 
-    createAddress = (addressData) => {
-        console.log(addressData);
-        this.setState({
-            isCreatingAddress: false,
-        });
+    createAddress = async (addressData) => {
+        try {
+            let address = await axios({
+                url: '/api/address',
+                method: 'POST',
+                data: addressData,
+            });
+            address = address.data.data.data;
+            const { addresses } = this.state;
+            addresses.unshift(address);
+            this.setState({
+                addresses,
+                isCreatingAddress: false,
+                selectedAddressId: 0,
+            });
+        } catch (error) {
+            this.setState({
+                isCreatingAddress: false,
+            });
+        }
     };
 
     render() {
@@ -158,12 +183,6 @@ class Order extends React.Component {
                         <h2>Szczegóły zamówienia:</h2>
                     </div>
                     <div className="order-viewer-form">
-                        <div className="from-row">
-                            <h3>
-                                Wartość zamówienia:{' '}
-                                {this.state.checkout.getCheckoutValue()} zł
-                            </h3>
-                        </div>
                         <div className="form-row">
                             <p>Wybierz rodzaj zamówienia:</p>
                             <div className="form-row-wrapper">
@@ -214,39 +233,43 @@ class Order extends React.Component {
                             <div className="form-row">
                                 <p>Adres dostawy:</p>
                                 <div className="form-row-wrapper">
-                                    <div className="address-card">
-                                        <div className="address-card-wrapper address-card-chosen">
-                                            <span
-                                                className="address-new"
-                                                onClick={() =>
-                                                    this.changeHandler(
-                                                        'isCreatingAddress',
-                                                        true
-                                                    )
-                                                }
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faPlusCircle}
-                                                />
-                                            </span>
-                                        </div>
-                                    </div>
-                                    {this.state.addresses.length > 0 &&
-                                        this.state.addresses.map(
-                                            (address, i) => (
-                                                <OrderAddressCard
-                                                    addressData={address}
-                                                    choose={this.selectAddress}
-                                                    isChosen={
-                                                        i ===
-                                                        this.state
-                                                            .selectedAddressId
+                                    <div className="order-address-list">
+                                        <div className="order-address-card">
+                                            <div className="order-address-card-wrapper ">
+                                                <span
+                                                    className="address-new"
+                                                    onClick={() =>
+                                                        this.changeHandler(
+                                                            'isCreatingAddress',
+                                                            true
+                                                        )
                                                     }
-                                                    addressId={i}
-                                                    key={i}
-                                                />
-                                            )
-                                        )}
+                                                >
+                                                    <FontAwesomeIcon
+                                                        icon={faPlusCircle}
+                                                    />
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {this.state.addresses.length > 0 &&
+                                            this.state.addresses.map(
+                                                (address, i) => (
+                                                    <OrderAddressCard
+                                                        addressData={address}
+                                                        choose={
+                                                            this.selectAddress
+                                                        }
+                                                        isChosen={
+                                                            i ===
+                                                            this.state
+                                                                .selectedAddressId
+                                                        }
+                                                        addressId={i}
+                                                        key={i}
+                                                    />
+                                                )
+                                            )}
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -259,7 +282,7 @@ class Order extends React.Component {
                                         this.changeHandler('isPayNow', true)
                                     }
                                 >
-                                    Zapłać teraz
+                                    Online
                                 </UserButton>
                                 <UserButton
                                     additionalClass={payWithDelivery}
@@ -267,9 +290,17 @@ class Order extends React.Component {
                                         this.changeHandler('isPayNow', false)
                                     }
                                 >
-                                    Zapłać przy odbiorze
+                                    Przy odbiorze
                                 </UserButton>
                             </div>
+                        </div>
+                        <div className="form-row">
+                            <h3>
+                                Wartość zamówienia:&nbsp;
+                                {formatPrice(
+                                    this.state.checkout.getCheckoutValue()
+                                )}
+                            </h3>
                         </div>
                         <div className="form-row">
                             <div className="form-row-wrapper">

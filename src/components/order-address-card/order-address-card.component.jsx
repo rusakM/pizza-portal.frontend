@@ -1,16 +1,14 @@
 import React from 'react';
-import UserButton from '../user-button/user-button.component';
 
 import './order-address-card.styles.scss';
 
 const OrderAddressCard = ({ addressData, choose, isChosen, addressId }) => {
     const cls = isChosen
-        ? 'address-card-wrapper address-card-chosen'
-        : 'address-card-wrapper';
+        ? 'order-address-card-wrapper order-address-card-chosen'
+        : 'order-address-card-wrapper';
     return (
-        <div className="address-card">
+        <div className="order-address-card" onClick={() => choose(addressId)}>
             <div className={cls}>
-                <p>{addressData.user.name}</p>
                 <p>
                     {addressData.street} {addressData.houseNumber}
                     {addressData.flatNumber && ` / ${addressData.flatNumber}`}
@@ -20,11 +18,6 @@ const OrderAddressCard = ({ addressData, choose, isChosen, addressId }) => {
                 </p>
                 <p>{addressData.phoneNumber}</p>
             </div>
-            {!isChosen && (
-                <UserButton onClick={() => choose(addressId)}>
-                    Wybierz
-                </UserButton>
-            )}
         </div>
     );
 };

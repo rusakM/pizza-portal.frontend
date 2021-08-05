@@ -40,13 +40,46 @@
             }
         }
         .order-viewer-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding-top: 1em;
             .form-row {
+                position: relative;
+                width: 50%;
+                left: 25%;
+                padding: 1em 0;
+                @media (max-width: 1024px) {
+                    width: 80%;
+                    left: 10%;
+                }
+
+                @media (max-width: 500px) {
+                    width: 95%;
+                    left: 2.5%;
+                }
+
+                p {
+                    padding: 0.5em;
+                }
                 .form-row-wrapper {
                     display: flex;
                     flex-direction: row;
+                    justify-content: space-around;
+
+                    & > span {
+                        width: 250px;
+                        @media (max-width: 1024px) {
+                            width: 230px;
+                        }
+                        @media (max-width: 500px) {
+                            font-size: 1em;
+                            width: 185px;
+                            padding-right: 0.35em;
+                            padding-left: 0.35em;
+                        }
+                    }
+
+                    .order-address-list {
+                        width: 100%;
+                    }
                 }
             }
         }
