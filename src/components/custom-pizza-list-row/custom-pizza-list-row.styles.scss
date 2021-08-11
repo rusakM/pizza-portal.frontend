@@ -1,0 +1,37 @@
+.custom-pizza-list-row {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    .custom-pizza-list-row-container {
+        border: 4px solid #f5c537;
+        border-radius: 1em;
+        padding: 0.5em;
+        margin: 0.5em 0.25em;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        @media (max-width: 700px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .custom-pizza-list-row-wrapper {
+            display: flex;
+            width: 100%;
+            position: relative;
+            flex-direction: row;
+            align-items: center;
+
+            div {
+                padding: 0.25em;
+            }
+
+            @media (max-width: 500px) {
+                flex-direction: column;
+            }
+        }
+    }
+}

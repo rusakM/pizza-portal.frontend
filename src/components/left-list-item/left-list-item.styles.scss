@@ -1,0 +1,38 @@
+.left-list-item {
+    padding: 2em 1.5em;
+    font-size: 1.35em;
+    color: #333;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+
+    @media (max-width: 480px) {
+        padding: 1.25em;
+        padding-bottom: 1em;
+        width: auto;
+    }
+
+    &:hover {
+        border-right: 5px solid #f5c537;
+        color: #555;
+        @media (max-width: 480px) {
+            border-right: none;
+            border-bottom: 5px solid #f5c537;
+        }
+    }
+
+    svg {
+        height: 1.35em;
+        width: 1.35em;
+    }
+}
+
+.active-list-item {
+    border-right: 5px solid #f5c537;
+    background-color: #f5f5f5;
+
+    @media (max-width: 480px) {
+        border-right: none;
+        border-bottom: 5px solid #f5c537;
+    }
+}
