@@ -2,6 +2,7 @@ import React from 'react';
 
 import SignIn from '../../components/sign-in/sign-in.component';
 import SignUp from '../../components/sign-up/sign-up.component';
+import LoadingScreen from '../../components/loading-screen/loading-screen.component';
 import './login-page.styles.scss';
 
 class LoginPage extends React.Component {
@@ -9,14 +10,24 @@ class LoginPage extends React.Component {
         super(props);
         this.state = {
             registerPage: false,
+            isLoadingData: false,
         };
     }
+
+    toggleLoadingScreen = () => {
+        this.setState({
+            isLoadingData: !this.state.isLoadingData,
+        });
+    };
 
     render() {
         const loginBtnClass = this.state.registerPage ? '' : 'active';
         const registerBtnClass = this.state.registerPage ? 'active' : '';
         return (
             <div className="login-page">
+                {this.state.isLoadingData && (
+                    <LoadingScreen>Logowanie...</LoadingScreen>
+                )}
                 <div className="login-page-container">
                     <div className="login-page-screens">
                         <div className="login-page-buttons">
@@ -42,9 +53,15 @@ class LoginPage extends React.Component {
                             </span>
                         </div>
                         {this.state.registerPage ? (
-                            <SignUp />
+                            <SignUp
+                                signup={this.props.signup}
+                                toggleLoadingScreen={this.toggleLoadingScreen}
+                            />
                         ) : (
-                            <SignIn login={this.props.login} />
+                            <SignIn
+                                login={this.props.login}
+                                toggleLoadingScreen={this.toggleLoadingScreen}
+                            />
                         )}
                     </div>
                 </div>

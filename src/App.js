@@ -140,6 +140,7 @@ class App extends React.Component {
                             <LoginPage
                                 login={this.login}
                                 history={this.props.history}
+                                signup={this.signup}
                             />
                         )}
                         path="/login"
