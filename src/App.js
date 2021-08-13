@@ -11,7 +11,7 @@ import Menu from './pages/menu-page/menu.component';
 import LoginPage from './pages/login-page/login-page.component';
 import AccountViewer from './pages/account/account.component';
 import PizzaCreator from './pages/pizza-creator/pizza-creator.component';
-import userStorageManager from './userStorageManager/userStorageManager';
+import userStorageManager from './utils/userStorageManager';
 import Order from './pages/order/order.component';
 import BookingComplete from './pages/booking-complete/booking-complete.component';
 import BookingViewer from './pages/booking-viewer/booking-viewer.component';

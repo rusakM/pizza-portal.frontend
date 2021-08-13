@@ -120,13 +120,10 @@ class Checkout {
         const categories = Object.values(CHECKOUT_CATEGORIES);
 
         for (let category of categories) {
-            console.log(category);
             const items = [];
             const templates = [];
             for (let item of this.checkout[category]) {
-                console.log(item._id);
                 for (let k = 0; k < item.count; k++) {
-                    console.log(k);
                     items.push(item._id);
                     if (category === CHECKOUT_CATEGORIES.PIZZA) {
                         templates.push(item.template.id);

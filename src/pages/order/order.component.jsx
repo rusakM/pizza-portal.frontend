@@ -10,7 +10,7 @@ import OrderAddressCard from '../../components/order-address-card/order-address-
 import CustomAlert from '../../components/custom-alert/custom-alert.component';
 import AddressCard from '../../components/address-card/address-card.component';
 import LoadingScreen from '../../components/loading-screen/loading-screen.component';
-import EMPTY_ADDRESS from '../../components/address-viewer/emptyAddress';
+import EMPTY_ADDRESS from '../../utils/emptyAddress';
 import formatPrice from '../../utils/formatPrice';
 import { stripePk } from '../../config';
 
@@ -33,7 +33,6 @@ class Order extends React.Component {
     }
 
     async componentDidMount() {
-        console.log(document.domain);
         try {
             let addresses = await axios({
                 method: 'GET',

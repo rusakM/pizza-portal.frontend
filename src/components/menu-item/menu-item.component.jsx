@@ -7,7 +7,7 @@ import formatPrice from '../../utils/formatPrice';
 
 import './menu-item.styles.scss';
 
-const MenuItem = ({ item, category, open }) => {
+const MenuItem = ({ item, category, open, togglePopup }) => {
     const photoUrl = `/uploads/${
         category === 'pizza' ? 'pizzas' : 'supplies'
     }/${item.coverPhoto}`;
@@ -46,11 +46,13 @@ const MenuItem = ({ item, category, open }) => {
                                         item,
                                         CHECKOUT_CATEGORIES.SAUCE
                                     );
+                                    togglePopup();
                                 } else if (category === 'napoje') {
                                     checkout.addItem(
                                         item,
                                         CHECKOUT_CATEGORIES.DRINK
                                     );
+                                    togglePopup();
                                 } else {
                                     return;
                                 }

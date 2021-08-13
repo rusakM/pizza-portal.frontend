@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ACCOUNT_LIST_DATA from '../account-list/account-list.data';
+import ACCOUNT_LIST_DATA from '../../utils/account-list.data';
 import AccountListItem from '../account-list-item/account-list-item.component';
 
 import './account-list-mobile.styles.scss';

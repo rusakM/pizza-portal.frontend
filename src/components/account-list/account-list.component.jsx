@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AccountListItem from '../account-list-item/account-list-item.component';
-import ACCOUNT_LIST_DATA from './account-list.data';
+import ACCOUNT_LIST_DATA from '../../utils/account-list.data';
 import './account-list.styles.scss';
 import './account-list-desktop.styles.scss';
 

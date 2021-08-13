@@ -5,7 +5,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import AddressCard from '../address-card/address-card.component';
 import UserButton from '../user-button/user-button.component';
-import EMPTY_ADDRESS from './emptyAddress';
+import EMPTY_ADDRESS from '../../utils/emptyAddress';
 import './address-viewer.styles.scss';
 
 class AddressViewer extends React.Component {

@@ -11,6 +11,8 @@ import './pizza-creator.styles.scss';
 import UserButton from '../../components/user-button/user-button.component';
 import LoadingScreen from '../../components/loading-screen/loading-screen.component';
 
+import formatPrice from '../../utils/formatPrice';
+
 class PizzaCreator extends React.Component {
     constructor(props) {
         super(props);
@@ -212,7 +214,7 @@ class PizzaCreator extends React.Component {
                         imgPath="pizza-creator"
                     />
                     <h1 className="pizza-viewer-price">
-                        {`${this.calculatePrice()} zł`}
+                        {formatPrice(this.calculatePrice())}
                     </h1>
                     <PizzaViewerButtons
                         changeSize={this.changeSize}

@@ -16,7 +16,10 @@ const BookingViewerTable = ({ products, price, isFinished }) => (
             {Object.values(CATS).map((category) => {
                 if (products[category].length > 0) {
                     return (
-                        <div className="booking-viewer-table-category">
+                        <div
+                            className="booking-viewer-table-category"
+                            key={category}
+                        >
                             <div className="booking-viewer-table-category-name">
                                 <h2>{CHECKOUT_CATEGORIES_NAMES[category]}:</h2>
                             </div>
@@ -25,6 +28,7 @@ const BookingViewerTable = ({ products, price, isFinished }) => (
                                     <BookingViewerTableRow
                                         itemData={item}
                                         category={category}
+                                        key={item._id}
                                     />
                                 ))}
                             </div>

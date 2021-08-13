@@ -14,7 +14,6 @@ const PizzaCreatorIngredientsList = ({
             for (let i = 0; i < usedIngredients.length; i++) {
                 if (item.id === usedIngredients[i].id) {
                     isUsed = true;
-                    console.log(i);
                     break;
                 }
             }

@@ -2,7 +2,7 @@ import React from 'react';
 import BookingViewerHistoryRow from '../booking-viewer-history-row/booking-viewer-history-row.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
-import { ReactComponent as Timeline } from './timeline.svg';
+import { ReactComponent as Timeline } from '../../svg/timeline.svg';
 import UserButton from '../user-button/user-button.component';
 import './booking-viewer-history.styles.scss';
 

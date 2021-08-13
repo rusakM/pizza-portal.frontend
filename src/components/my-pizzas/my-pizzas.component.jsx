@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import PizzaListRow from '../pizza-list-row/pizza-list-row.component';
-
+import UserButton from '../user-button/user-button.component';
 import Checkout, { CHECKOUT_CATEGORIES } from '../../checkout/checkout';
 
 import './my-pizzas.styles.scss';
@@ -55,12 +55,13 @@ class MyPizzas extends React.Component {
     addToCart = (pizza) => {
         const checkout = new Checkout();
         checkout.addItem(pizza, CHECKOUT_CATEGORIES.OWN_PIZZA);
+        this.props.togglePopup();
     };
 
     render() {
         const { pizzas, dataReadyStatus } = this.state;
         return (
-            <div className="account-container">
+            <div className=" my-pizzas account-container">
                 {pizzas.length === 0 && dataReadyStatus && (
                     <p>
                         Nie utworzyłeś jeszcze żadnej pizzy. Skorzystaj z
@@ -68,15 +69,23 @@ class MyPizzas extends React.Component {
                     </p>
                 )}
                 {pizzas.length > 0 && <h1>Moje pizze:</h1>}
-                {pizzas.map((pizza, num) => (
-                    <PizzaListRow
-                        pizza={pizza}
-                        remove={this.removePizza}
-                        addToCart={this.addToCart}
-                        edit={this.editPizza}
-                        key={num}
-                    />
-                ))}
+                <UserButton
+                    additionalClass="my-pizzas-new-btn"
+                    onClick={() => this.props.history.push('/pizza-creator')}
+                >
+                    Utwórz nową
+                </UserButton>
+                <div className="my-pizzas-list">
+                    {pizzas.map((pizza, num) => (
+                        <PizzaListRow
+                            pizza={pizza}
+                            remove={this.removePizza}
+                            addToCart={this.addToCart}
+                            edit={this.editPizza}
+                            key={num}
+                        />
+                    ))}
+                </div>
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import PanelMenuItem from '../panel-menu-item/panel-menu-item.component';
+import { ReactComponent as Pizza } from '../../svg/pizza.svg';
 
 import './panel-menu.styles.scss';
 
@@ -14,6 +15,9 @@ const PanelMenu = ({ reference, currentUser, items, logout }) => (
             }}
         >
             <FontAwesomeIcon icon={faTimes} />
+        </span>
+        <span className="panel-menu-logo">
+            <Pizza />
         </span>
         <ul>
             <PanelMenuItem link="/">Strona główna</PanelMenuItem>

@@ -1,44 +1,55 @@
 .panel-menu {
-  display: none;
-  position: fixed;
-  flex-direction: column;
-  width: 90%;
-  max-width: 400px;
-  top: 0;
-  left: 100%;
-  transform: translateX(-100%);
-  background-color: #f5c537;
-  height: 100%;
-  z-index: 5;
-  align-items: flex-end;
-  .panel-menu-close-button {
-    position: relative;
-    font-size: 3em;
-    color: black;
-    top: 0.5em;
-    right: 1em;
-    &:hover {
-      color: #444;
-      animation: animate-rotation;
-      animation-duration: 1s;
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    width: 90%;
+    max-width: 400px;
+    top: 0;
+    left: 100%;
+    transform: translateX(-100%);
+    background-color: #f5c537;
+    height: 100%;
+    z-index: 5;
+    align-items: flex-end;
+    .panel-menu-close-button {
+        position: relative;
+        font-size: 3em;
+        color: black;
+        top: 0.5em;
+        right: 1em;
+        z-index: 6;
+        &:hover {
+            color: #444;
+            animation: animate-rotation;
+            animation-duration: 1s;
+        }
+        @media (max-width: 500px) {
+            right: 0.5em;
+        }
     }
-    @media (max-width: 500px) {
-      right: 0.5em;
+
+    .panel-menu-logo {
+        position: relative;
+        width: 100%;
+        padding-left: 2em;
+        top: -3em;
+        svg {
+            width: 80px;
+            height: 80px;
+        }
     }
-  }
-  & > ul {
-    position: relative;
-    list-style-type: none;
-    top: 25%;
-    text-align: end;
-  }
+    & > ul {
+        position: relative;
+        list-style-type: none;
+        text-align: end;
+    }
 }
 
 @keyframes animate-rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

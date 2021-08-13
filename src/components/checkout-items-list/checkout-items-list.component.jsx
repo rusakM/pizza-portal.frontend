@@ -14,6 +14,7 @@ const CheckoutItemsList = ({ category, items, add, remove, clear }) => {
                     add={add}
                     remove={remove}
                     clear={clear}
+                    key={item._id}
                 />
             ))}
         </div>

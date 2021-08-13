@@ -1,0 +1,30 @@
+.checkout-btn-container {
+    position: fixed;
+    z-index: 4;
+    bottom: 15%;
+    right: 1em;
+    display: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 40px;
+    background-color: #f5c537;
+    text-align: center;
+    @media (max-width: 1024px) {
+        display: inline;
+    }
+    .checkout-btn-icon {
+        font-size: 45px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 6px;
+    }
+
+    .checkout-btn-count {
+        position: absolute;
+        color: #f5c537;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

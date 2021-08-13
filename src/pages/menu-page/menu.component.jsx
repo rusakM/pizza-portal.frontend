@@ -11,6 +11,8 @@ import MenuList from '../../components/menu-list/menu-list.component';
 import LeftListItem from '../../components/left-list-item/left-list-item.component';
 import CustomPizzaListRow from '../../components/custom-pizza-list-row/custom-pizza-list-row.component';
 import CustomAlert from '../../components/custom-alert/custom-alert.component';
+import CheckoutBtn from '../../components/checkout-btn/checkout-btn.component';
+import ElementAddedToCheckout from '../../components/element-added-to-checkout/element-added-to-checkout.component';
 
 import './menu.styles.scss';
 import UserButton from '../../components/user-button/user-button.component';
@@ -24,6 +26,7 @@ class Menu extends React.Component {
             sosy: [],
             activeList: 'pizza',
             customPizzaPopup: false,
+            addedElementToCheckoutPopup: false,
             ownPizzas: [],
         };
     }
@@ -64,6 +67,13 @@ class Menu extends React.Component {
         });
     };
 
+    toggleAddedElementToCheckoutPopup = () => {
+        this.setState({
+            addedElementToCheckoutPopup:
+                !this.state.addedElementToCheckoutPopup,
+        });
+    };
+
     clickHandlerMenuButton = async (category) => {
         try {
             const url = `api/products?category=${category}`;
@@ -88,7 +98,12 @@ class Menu extends React.Component {
     };
 
     render() {
-        const { activeList, customPizzaPopup, ownPizzas } = this.state;
+        const {
+            activeList,
+            customPizzaPopup,
+            ownPizzas,
+            addedElementToCheckoutPopup,
+        } = this.state;
         return (
             <div className="menu">
                 <div className="menu-container">
@@ -165,6 +180,8 @@ class Menu extends React.Component {
                         category={this.state.activeList}
                         userIsLoggedIn={this.props.currentUser !== null}
                         openPizzaPage={this.openPizzaPage}
+                        refreshCheckoutCount={this.props.refreshCheckoutCount}
+                        togglePopup={this.toggleAddedElementToCheckoutPopup}
                     />
                 </div>
                 {customPizzaPopup && (
@@ -198,6 +215,14 @@ class Menu extends React.Component {
                         </div>
                     </CustomAlert>
                 )}
+                {addedElementToCheckoutPopup && (
+                    <CustomAlert>
+                        <ElementAddedToCheckout
+                            confirm={this.toggleAddedElementToCheckoutPopup}
+                        />
+                    </CustomAlert>
+                )}
+                <CheckoutBtn />
             </div>
         );
     }

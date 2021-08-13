@@ -113,7 +113,7 @@ class ChangePassword extends React.Component {
                             name="passwordCurrent"
                             value={this.state.passwordCurrent}
                             onChange={this.inputHandler}
-                            autocomplete="new-password"
+                            autoComplete="new-password"
                         >
                             Hasło:
                         </UserInput>
@@ -122,7 +122,7 @@ class ChangePassword extends React.Component {
                             name="password"
                             value={this.state.password}
                             onChange={this.inputHandler}
-                            autocomplete="new-password"
+                            autoComplete="new-password"
                         >
                             Nowe hasło:
                         </UserInput>
@@ -131,7 +131,7 @@ class ChangePassword extends React.Component {
                             name="passwordConfirm"
                             value={this.state.passwordConfirm}
                             onChange={this.inputHandler}
-                            autocomplete="new-password"
+                            autoComplete="new-password"
                         >
                             Powtórz hasło:
                         </UserInput>

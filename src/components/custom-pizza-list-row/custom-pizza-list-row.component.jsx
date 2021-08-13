@@ -19,7 +19,7 @@ const CustomPizzaListRow = ({ pizzaData, open }) => (
                 <div>
                     {pizzaData.ingredients
                         .map((item) => item.name + ', ')
-                        .join('') + 'mozzarella, oregano, sos pomidowowy'}
+                        .join('') + 'mozzarella, oregano, sos pomidorowy'}
                 </div>
             </div>
             <UserButton onClick={() => open(pizzaData._id)}>Wybierz</UserButton>

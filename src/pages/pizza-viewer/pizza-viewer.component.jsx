@@ -8,6 +8,9 @@ import PizzaViewerPhoto from '../../components/pizza-viewer-photo/pizza-viewer-p
 import PizzaViewerButtons from '../../components/pizza-viewer-buttons/pizza-viewer-buttons.component';
 import PizzaVieverButton from '../../components/pizza-viewer-button/pizza-viewer-button.component';
 import PizzaViewerIngredientsList from '../../components/pizza-viewer-ingredients-list/pizza-viewer-ingredients-list.component';
+import ElementAddedToCheckout from '../../components/element-added-to-checkout/element-added-to-checkout.component';
+import CheckoutBtn from '../../components/checkout-btn/checkout-btn.component';
+import CustomAlert from '../../components/custom-alert/custom-alert.component';
 import './pizza-viewer.styles.scss';
 
 class PizzaViewer extends React.Component {
@@ -19,6 +22,7 @@ class PizzaViewer extends React.Component {
             },
             currentPizza: null,
             currentSize: 24,
+            elementAddedToCheckoutPopup: false,
         };
     }
 
@@ -95,6 +99,14 @@ class PizzaViewer extends React.Component {
             slug: pizzaData.slug,
         };
         checkout.addItem(currentPizza, CHECKOUT_CATEGORIES.PIZZA);
+        this.togglePopup();
+    };
+
+    togglePopup = () => {
+        this.setState({
+            elementAddedToCheckoutPopup:
+                !this.state.elementAddedToCheckoutPopup,
+        });
     };
 
     render() {
@@ -106,6 +118,7 @@ class PizzaViewer extends React.Component {
                   };
               })
             : [];
+        const { elementAddedToCheckoutPopup } = this.state;
         return (
             <div className="pizza-viewer">
                 <div className="pizza-viewer-container">
@@ -142,6 +155,12 @@ class PizzaViewer extends React.Component {
                         reference={this.ingredientsList}
                     />
                 </div>
+                {elementAddedToCheckoutPopup && (
+                    <CustomAlert>
+                        <ElementAddedToCheckout confirm={this.togglePopup} />
+                    </CustomAlert>
+                )}
+                <CheckoutBtn />
             </div>
         );
     }

@@ -1,8 +1,6 @@
 import React, { createRef } from 'react';
-
 import axios from 'axios';
-import { apiUrl } from '../../config';
-
+import CheckoutBtn from '../../components/checkout-btn/checkout-btn.component';
 import './landing-page.styles.scss';
 
 class LandingPage extends React.Component {
@@ -14,7 +12,21 @@ class LandingPage extends React.Component {
             phoneNumber: '',
             subject: '',
             message: '',
+            topPizzas: [],
         };
+    }
+
+    async componentDidMount() {
+        try {
+            const top3Pizzas = await axios({
+                method: 'GET',
+                url: '/api/pizzas/templates/top-3-pizzas',
+            });
+
+            this.setState({
+                topPizzas: top3Pizzas.data.data.data,
+            });
+        } catch (error) {}
     }
 
     handleChange = (event) => {
@@ -63,7 +75,12 @@ class LandingPage extends React.Component {
                                 NAJLEPSZA PIZZA W MIEŚCIE!
                             </h2>
                         </div>
-                        <span className="home-btn">ZAMÓW PIZZĘ ONLINE</span>
+                        <span
+                            className="home-btn"
+                            onClick={() => this.props.history.push('/menu')}
+                        >
+                            ZAMÓW PIZZĘ ONLINE
+                        </span>
                     </div>
                 </section>
                 <section className="menu-hot">
@@ -79,45 +96,32 @@ class LandingPage extends React.Component {
                         ></div>
                     </div>
                     <div className="menu-hot-items-container">
-                        <div className="menu-card-item">
-                            <div className="menu-card-photo-container">
-                                <img
-                                    src="img/landing-page/capriciosa.png"
-                                    alt=""
-                                    className="menu-card-photo"
-                                />
+                        {this.state.topPizzas.map((item) => (
+                            <div
+                                className="menu-card-item"
+                                onClick={() =>
+                                    this.props.history.push(
+                                        `/menu/pizza/${item.slug}`
+                                    )
+                                }
+                                key={item._id}
+                            >
+                                <div className="menu-card-photo-container">
+                                    <img
+                                        src={`/uploads/pizzas/${item.coverPhoto}`}
+                                        alt={item.slug}
+                                        className="menu-card-photo"
+                                    />
+                                </div>
+                                <h3>{item.name.toUpperCase()}</h3>
+                                <p className="menu-card-description">
+                                    {item.smallPizza.ingredients
+                                        .map((item) => item.name + ', ')
+                                        .join('') +
+                                        'mozzarella, oregano, sos pomidorowy'}
+                                </p>
                             </div>
-                            <h3>CAPRICIOSA</h3>
-                            <p className="menu-card-description">
-                                Ser, szynka, pieczarki, oliwki
-                            </p>
-                        </div>
-                        <div className="menu-card-item">
-                            <div className="menu-card-photo-container">
-                                <img
-                                    src="img/landing-page/pollo.png"
-                                    alt=""
-                                    className="menu-card-photo"
-                                />
-                            </div>
-                            <h3>POLLO</h3>
-                            <p className="menu-card-description">
-                                Ser, szynka, cebula, pomidorki koktajlowe
-                            </p>
-                        </div>
-                        <div className="menu-card-item">
-                            <div className="menu-card-photo-container">
-                                <img
-                                    src="img/landing-page/havai.png"
-                                    alt=""
-                                    className="menu-card-photo"
-                                />
-                            </div>
-                            <h3>HAVAI</h3>
-                            <p className="menu-card-description">
-                                Ser, szynka, ananas, pieczarki
-                            </p>
-                        </div>
+                        ))}
                     </div>
                 </section>
                 <section className="about" id="about">
@@ -203,9 +207,8 @@ class LandingPage extends React.Component {
                                     name="message"
                                     required
                                     onChange={this.handleChange}
-                                >
-                                    {this.state.message}
-                                </textarea>
+                                    value={this.state.message}
+                                ></textarea>
                                 <button className="btn">Wyślij</button>
                             </form>
                         </div>
@@ -226,6 +229,7 @@ class LandingPage extends React.Component {
                         </span>
                     </div>
                 </aside>
+                <CheckoutBtn />
             </div>
         );
     }

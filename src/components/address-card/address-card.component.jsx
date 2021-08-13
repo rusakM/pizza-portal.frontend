@@ -9,7 +9,7 @@ import {
 
 import UserButton from '../user-button/user-button.component';
 import AddressInput from '../address-input/address-input.component';
-import AddressCardValidator from './address-card.validator';
+import AddressCardValidator from '../../utils/address-card.validator';
 
 import './address-card.styles.scss';
 
@@ -194,7 +194,6 @@ class AddressCard extends React.Component {
                                             _id,
                                             num
                                         );
-                                        //this.toggleEdit();
                                     }
                                 }}
                                 additionalClass="address-button"
