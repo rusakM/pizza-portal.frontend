@@ -11,6 +11,7 @@ import PizzaViewerIngredientsList from '../../components/pizza-viewer-ingredient
 import ElementAddedToCheckout from '../../components/element-added-to-checkout/element-added-to-checkout.component';
 import CheckoutBtn from '../../components/checkout-btn/checkout-btn.component';
 import CustomAlert from '../../components/custom-alert/custom-alert.component';
+import formatPrice from '../../utils/formatPrice';
 import './pizza-viewer.styles.scss';
 
 class PizzaViewer extends React.Component {
@@ -140,7 +141,7 @@ class PizzaViewer extends React.Component {
                     ) : null}
                     <h1 className="pizza-viewer-price">
                         {this.state.currentPizza
-                            ? `${this.state.currentPizza.price} zł`
+                            ? `${formatPrice(this.state.currentPizza.price)}`
                             : '0 zł'}
                     </h1>
                     <PizzaViewerButtons
