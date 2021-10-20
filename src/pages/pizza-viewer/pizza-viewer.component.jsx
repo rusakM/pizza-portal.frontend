@@ -115,7 +115,7 @@ class PizzaViewer extends React.Component {
             ? this.state.pizzaData.smallPizza.ingredients.map((ingredient) => {
                   return {
                       name: ingredient.name,
-                      coverPhoto: `/uploads/supplies/${ingredient.coverPhoto}.png`,
+                      coverPhoto: `/uploads/supplies/${ingredient.coverPhoto}`,
                   };
               })
             : [];

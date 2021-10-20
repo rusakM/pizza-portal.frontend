@@ -9,7 +9,7 @@ import './menu-item.styles.scss';
 
 const MenuItem = ({ item, category, open, togglePopup }) => {
     const photoUrl = `/uploads/${
-        category === 'pizza' ? 'pizzas' : 'supplies'
+        category === 'pizza' ? 'pizzas' : 'products'
     }/${item.coverPhoto}`;
     let ingredients = 'pomidory, mozzarella, oregano';
     if (category === 'pizza' && item.smallPizza.ingredients.length) {

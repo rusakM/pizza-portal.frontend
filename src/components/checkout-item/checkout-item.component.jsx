@@ -10,7 +10,7 @@ const CheckoutItem = ({ item, category, add, remove, clear }) => {
         category === CHECKOUT_CATEGORIES.PIZZA ||
         category === CHECKOUT_CATEGORIES.OWN_PIZZA
             ? 'pizzas'
-            : 'supplies';
+            : 'products';
     const coverPhoto =
         category === CHECKOUT_CATEGORIES.OWN_PIZZA
             ? null

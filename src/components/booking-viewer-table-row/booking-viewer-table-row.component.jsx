@@ -7,9 +7,13 @@ import './booking-viewer-table-row.styles.scss';
 
 const BookingViewerTableRow = ({ itemData, category }) => {
     const { _id, name, price, quantity, totalAmount } = itemData;
+    const categoryType =
+        category === CATS.DRINK || category === CATS.SAUCE
+            ? 'products'
+            : category;
     let coverPhoto = (
         <img
-            src={`/uploads/${category}/${itemData.coverPhoto}`}
+            src={`/uploads/${categoryType}/${itemData.coverPhoto}`}
             className="booking-viewer-table-row-photo-img"
             alt={name}
         />
