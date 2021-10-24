@@ -23,7 +23,7 @@ class SignIn extends React.Component {
         event.preventDefault();
         const { email, password } = this.state;
         this.props.toggleLoadingScreen();
-        this.props.login(email, password);
+        this.props.login(email, password, () => this.props.showError('login'));
     };
 
     render() {

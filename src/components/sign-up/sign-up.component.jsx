@@ -19,10 +19,10 @@ class SignUp extends React.Component {
         });
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
         this.props.toggleLoadingScreen();
-        this.props.signup(this.state);
+        this.props.signup(this.state, this.props.showError);
     };
 
     render() {
@@ -48,7 +48,7 @@ class SignUp extends React.Component {
                     />
                     <LoginInput
                         handleChange={this.handleChamge}
-                        label="Hasło"
+                        label="Hasło (min 8 znaków)"
                         name="password"
                         required
                         value={this.state.password}
