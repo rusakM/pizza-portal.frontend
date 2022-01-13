@@ -4,6 +4,7 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Checkout, { CHECKOUT_CATEGORIES } from '../../checkout/checkout';
 import CheckoutItemsList from '../../components/checkout-items-list/checkout-items-list.component';
 import BookingBtn from '../../components/booking-btn/booking-btn.component';
+import formatPrice from '../../utils/formatPrice';
 
 import './checkout-viewer.styles.scss';
 
@@ -68,8 +69,10 @@ class CheckoutViewer extends React.Component {
                     <div className="summary">
                         <p>
                             <b>
-                                Wartość twojego koszyka:{' '}
-                                {this.state.checkout.getCheckoutValue()} zł
+                                Wartość twojego koszyka:&nbsp;
+                                {formatPrice(
+                                    this.state.checkout.getCheckoutValue()
+                                )}
                             </b>
                         </p>
                     </div>
