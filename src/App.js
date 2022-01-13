@@ -26,7 +26,7 @@ class App extends React.Component {
         this.timeout = null;
     }
 
-    login = (email, password) => {
+    login = (email, password, cb) => {
         axios({
             method: 'POST',
             url: `/api/users/login`,
@@ -50,10 +50,14 @@ class App extends React.Component {
                 );
                 this.props.history.push('/');
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                if (cb) {
+                    cb();
+                }
+            });
     };
 
-    signup = (data) => {
+    signup = (data, cb) => {
         axios({
             method: 'POST',
             url: '/api/users/signup',
@@ -74,7 +78,11 @@ class App extends React.Component {
                 );
                 this.props.history.push('/');
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                if (cb) {
+                    cb();
+                }
+            });
     };
 
     logout = async () => {

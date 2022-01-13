@@ -3,6 +3,7 @@ import React from 'react';
 import SignIn from '../../components/sign-in/sign-in.component';
 import SignUp from '../../components/sign-up/sign-up.component';
 import LoadingScreen from '../../components/loading-screen/loading-screen.component';
+import AlertBasic from '../../components/alert-basic/alert-basic.component';
 import './login-page.styles.scss';
 
 class LoginPage extends React.Component {
@@ -11,12 +12,33 @@ class LoginPage extends React.Component {
         this.state = {
             registerPage: false,
             isLoadingData: false,
+            isErrorVisible: false,
+            errorMessage: '',
         };
     }
 
     toggleLoadingScreen = () => {
         this.setState({
             isLoadingData: !this.state.isLoadingData,
+        });
+    };
+
+    showError = (screen) => {
+        this.setState({
+            isErrorVisible: true,
+            errorMessage:
+                screen === 'login'
+                    ? 'Nie udało się zalogować, spróbuj ponownie'
+                    : 'Błąd podczas rejestracji, spróbuj ponownie',
+            isLoadingData: false,
+        });
+    };
+
+    closeError = () => {
+        this.setState({
+            isLoadingData: false,
+            isErrorVisible: false,
+            errorMessage: '',
         });
     };
 
@@ -56,11 +78,13 @@ class LoginPage extends React.Component {
                             <SignUp
                                 signup={this.props.signup}
                                 toggleLoadingScreen={this.toggleLoadingScreen}
+                                showError={this.showError}
                             />
                         ) : (
                             <SignIn
                                 login={this.props.login}
                                 toggleLoadingScreen={this.toggleLoadingScreen}
+                                showError={this.showError}
                             />
                         )}
                     </div>
@@ -71,6 +95,11 @@ class LoginPage extends React.Component {
                         backgroundImage: `url('/img/login-page/background.jpg')`,
                     }}
                 ></div>
+                {this.state.isErrorVisible && (
+                    <AlertBasic buttonTxt="Ok" confirmAction={this.closeError}>
+                        {this.state.errorMessage}
+                    </AlertBasic>
+                )}
             </div>
         );
     }
